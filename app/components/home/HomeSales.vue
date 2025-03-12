@@ -15,7 +15,7 @@ const sampleEmails = [
   'mia.white@example.com',
   'william.brown@example.com',
   'emma.davis@example.com',
-  'ethan.harris@example.com'
+  'ethan.harris@example.com',
 ]
 
 const { data } = await useAsyncData('sales', async () => {
@@ -29,7 +29,7 @@ const { data } = await useAsyncData('sales', async () => {
     sales.push({
       id: (4600 - i).toString(),
       date: date.toISOString(),
-      status: randomFrom(['paid', 'failed', 'refunded']),
+      status: randomFrom(['Payer', 'Erreur', 'Rembourser']),
       email: randomFrom(sampleEmails),
       amount: randomInt(100, 1000)
     })
@@ -65,9 +65,9 @@ const columns: TableColumn<Sale>[] = [
     header: 'Status',
     cell: ({ row }) => {
       const color = {
-        paid: 'success' as const,
-        failed: 'error' as const,
-        refunded: 'neutral' as const
+        Payer: 'success' as const,
+        Erreur: 'error' as const,
+        Rembourser: 'neutral' as const
       }[row.getValue('status') as string]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
@@ -85,7 +85,7 @@ const columns: TableColumn<Sale>[] = [
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue('amount'))
 
-      const formatted = new Intl.NumberFormat('en-US', {
+      const formatted = new Intl.NumberFormat('fr-FR', {
         style: 'currency',
         currency: 'EUR'
       }).format(amount)

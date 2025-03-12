@@ -2,19 +2,19 @@
 import { DateFormatter, getLocalTimeZone, CalendarDate, today } from '@internationalized/date'
 import type { Range } from '~/types'
 
-const df = new DateFormatter('en-US', {
-  dateStyle: 'medium'
+const df = new DateFormatter('fr-FR', {
+  dateStyle: 'long'
 })
 
 const selected = defineModel<Range>({ required: true })
 
 const ranges = [
-  { label: 'Last 7 days', days: 7 },
-  { label: 'Last 14 days', days: 14 },
-  { label: 'Last 30 days', days: 30 },
-  { label: 'Last 3 months', months: 3 },
-  { label: 'Last 6 months', months: 6 },
-  { label: 'Last year', years: 1 }
+  { label: 'Dernier 7 jours', days: 7 },
+  { label: 'Dernier 14 jours', days: 14 },
+  // { label: 'Dernier 30 jours', days: 30 },
+  // { label: 'Dernier 3 mois', months: 3 },
+  // { label: 'Dernier 6 mois', months: 6 },
+  // { label: 'Derniere année', years: 1 }
 ]
 
 const toCalendarDate = (date: Date) => {
@@ -125,6 +125,7 @@ const selectRange = (range: { days?: number, months?: number, years?: number }) 
           class="p-2"
           :number-of-months="2"
           range
+          locale="fr"
         />
       </div>
     </template>

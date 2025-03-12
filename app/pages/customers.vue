@@ -138,9 +138,9 @@ const columns: TableColumn<User>[] = [
     filterFn: 'equals',
     cell: ({ row }) => {
       const color = {
-        subscribed: 'success' as const,
-        unsubscribed: 'error' as const,
-        bounced: 'warning' as const
+        Abonner: 'success' as const,
+        Desabonner: 'error' as const,
+        Suspendu: 'warning' as const
       }[row.original.status]
 
       return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>

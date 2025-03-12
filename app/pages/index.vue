@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { sub } from 'date-fns'
+import { sub, format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 import type { Period, Range } from '~/types'
 
 const { isNotificationsSlideoverOpen } = useDashboard()
@@ -19,6 +20,15 @@ const range = shallowRef<Range>({
   end: new Date()
 })
 const period = ref<Period>('daily')
+
+// Fonction pour formater la date en français
+const formatDate = (date: Date): string => format(date, 'dd MMMM yyyy', { locale: fr })
+
+// Exemple d'affichage des dates formatées
+const formattedRange = computed(() => ({
+  start: formatDate(range.value.start),
+  end: formatDate(range.value.end)
+}))
 </script>
 
 <template>
