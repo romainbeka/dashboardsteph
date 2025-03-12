@@ -7,7 +7,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=1'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'New York, USA'
 }, {
   id: 2,
@@ -16,7 +16,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=2'
   },
-  status: 'unsubscribed',
+  status: 'Désabonner',
   location: 'London, UK'
 }, {
   id: 3,
@@ -25,7 +25,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=3'
   },
-  status: 'bounced',
+  status: 'Suspendu',
   location: 'Paris, France'
 }, {
   id: 4,
@@ -34,7 +34,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=4'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Berlin, Germany'
 }, {
   id: 5,
@@ -43,7 +43,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=5'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Tokyo, Japan'
 }, {
   id: 6,
@@ -52,7 +52,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=6'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Sydney, Australia'
 }, {
   id: 7,
@@ -61,7 +61,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=7'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'New York, USA'
 }, {
   id: 8,
@@ -70,7 +70,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=8'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'London, UK'
 }, {
   id: 9,
@@ -79,7 +79,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=9'
   },
-  status: 'bounced',
+  status: 'Suspendu',
   location: 'Paris, France'
 }, {
   id: 10,
@@ -88,7 +88,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=10'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Berlin, Germany'
 }, {
   id: 11,
@@ -97,7 +97,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=11'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Tokyo, Japan'
 }, {
   id: 12,
@@ -106,7 +106,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=12'
   },
-  status: 'unsubscribed',
+  status: 'Désabonner',
   location: 'Sydney, Australia'
 }, {
   id: 13,
@@ -115,7 +115,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=13'
   },
-  status: 'unsubscribed',
+  status: 'Désabonner',
   location: 'New York, USA'
 }, {
   id: 14,
@@ -124,7 +124,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=14'
   },
-  status: 'unsubscribed',
+  status: 'Désabonner',
   location: 'London, UK'
 }, {
   id: 15,
@@ -133,7 +133,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=15'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Paris, France'
 }, {
   id: 16,
@@ -142,7 +142,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=16'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Berlin, Germany'
 }, {
   id: 17,
@@ -151,7 +151,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=17'
   },
-  status: 'unsubscribed',
+  status: 'Désabonner',
   location: 'Tokyo, Japan'
 }, {
   id: 18,
@@ -160,7 +160,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=18'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'Sydney, Australia'
 }, {
   id: 19,
@@ -169,7 +169,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=19'
   },
-  status: 'bounced',
+  status: 'Suspendu',
   location: 'New York, USA'
 }, {
   id: 20,
@@ -178,7 +178,7 @@ const customers: User[] = [{
   avatar: {
     src: 'https://i.pravatar.cc/128?u=20'
   },
-  status: 'subscribed',
+  status: 'Abonné',
   location: 'London, UK'
 }]
 

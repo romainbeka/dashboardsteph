@@ -138,8 +138,8 @@ const columns: TableColumn<User>[] = [
     filterFn: 'equals',
     cell: ({ row }) => {
       const color = {
-        Abonner: 'success' as const,
-        Desabonner: 'error' as const,
+        Abonné: 'success' as const,
+        Désabonner: 'error' as const,
         Suspendu: 'warning' as const
       }[row.original.status]
 
@@ -241,9 +241,9 @@ const pagination = ref({
             v-model="statusFilter"
             :items="[
               { label: 'All', value: 'all' },
-              { label: 'Subscribed', value: 'subscribed' },
-              { label: 'Unsubscribed', value: 'unsubscribed' },
-              { label: 'Bounced', value: 'bounced' }
+              { label: 'Abonner', value: 'Abonner' },
+              { label: 'Desabonner', value: 'Desabonner' },
+              { label: 'Suspendu', value: 'Suspendu' }
             ]"
             :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
             placeholder="Filter status"
