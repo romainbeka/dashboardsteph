@@ -5,14 +5,14 @@ const toast = useToast()
 const open = ref(false)
 
 const links = [[{
-  label: 'Home',
+  label: 'Accueil',
   icon: 'i-lucide-house',
   to: '/',
   onSelect: () => {
     open.value = false
   }
 }, {
-  label: 'Inbox',
+  label: 'Mail',
   icon: 'i-lucide-inbox',
   to: '/inbox',
   badge: '4',
@@ -20,26 +20,26 @@ const links = [[{
     open.value = false
   }
 }, {
-  label: 'Customers',
+  label: 'Membres',
   icon: 'i-lucide-users',
   to: '/customers',
   onSelect: () => {
     open.value = false
   }
 }, {
-  label: 'Settings',
+  label: 'Paramètres',
   to: '/settings',
   icon: 'i-lucide-settings',
   defaultOpen: true,
   children: [{
-    label: 'General',
+    label: 'Général',
     to: '/settings',
     exact: true,
     onSelect: () => {
       open.value = false
     }
   }, {
-    label: 'Members',
+    label: 'Employer',
     to: '/settings/members',
     onSelect: () => {
       open.value = false
@@ -51,7 +51,7 @@ const links = [[{
       open.value = false
     }
   }, {
-    label: 'Security',
+    label: 'Sécurité',
     to: '/settings/security',
     onSelect: () => {
       open.value = false

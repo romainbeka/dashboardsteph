@@ -199,7 +199,7 @@ const pagination = ref({
 <template>
   <UDashboardPanel id="customers">
     <template #header>
-      <UDashboardNavbar title="Customers">
+      <UDashboardNavbar title="Membres">
         <template #leading>
           <UDashboardSidebarCollapse />
         </template>
@@ -224,7 +224,7 @@ const pagination = ref({
           <CustomersDeleteModal :count="table?.tableApi?.getFilteredSelectedRowModel().rows.length">
             <UButton
               v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
-              label="Delete"
+              label="Supprimer"
               color="error"
               variant="subtle"
               icon="i-lucide-trash"
@@ -240,9 +240,9 @@ const pagination = ref({
           <USelect
             v-model="statusFilter"
             :items="[
-              { label: 'All', value: 'all' },
-              { label: 'Abonner', value: 'Abonner' },
-              { label: 'Desabonner', value: 'Desabonner' },
+              { label: 'Tout', value: 'all' },
+              { label: 'Abonné', value: 'Abonné' },
+              { label: 'Désabonner', value: 'Désabonner' },
               { label: 'Suspendu', value: 'Suspendu' }
             ]"
             :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
@@ -269,7 +269,7 @@ const pagination = ref({
             :content="{ align: 'end' }"
           >
             <UButton
-              label="Display"
+              label="Afficher"
               color="neutral"
               variant="outline"
               trailing-icon="i-lucide-settings-2"

@@ -9,16 +9,16 @@ defineProps<{
 const emits = defineEmits(['close'])
 
 const dropdownItems = [[{
-  label: 'Mark as unread',
+  label: 'Marquer comme lu',
   icon: 'i-lucide-check-circle'
 }, {
-  label: 'Mark as important',
+  label: 'Marquer comme important',
   icon: 'i-lucide-triangle-alert'
 }], [{
-  label: 'Star thread',
+  label: 'Favori',
   icon: 'i-lucide-star'
 }, {
-  label: 'Mute thread',
+  label: 'Mute',
   icon: 'i-lucide-circle-pause'
 }]]
 
@@ -34,8 +34,8 @@ function onSubmit() {
     reply.value = ''
 
     toast.add({
-      title: 'Email sent',
-      description: 'Your email has been sent successfully',
+      title: 'Email envoyer',
+      description: 'Ton email à été correctement envoyer',
       icon: 'i-lucide-check-circle',
       color: 'success'
     })
@@ -67,7 +67,7 @@ function onSubmit() {
           />
         </UTooltip>
 
-        <UTooltip text="Reply">
+        <UTooltip text="Répondre">
           <UButton icon="i-lucide-reply" color="neutral" variant="ghost" />
         </UTooltip>
 
@@ -116,7 +116,7 @@ function onSubmit() {
           <UIcon name="i-lucide-reply" class="size-5" />
 
           <span class="text-sm truncate">
-            Reply to {{ mail.from.name }} ({{ mail.from.email }})
+            Réponse à {{ mail.from.name }} ({{ mail.from.email }})
           </span>
         </template>
 
@@ -147,13 +147,13 @@ function onSubmit() {
               <UButton
                 color="neutral"
                 variant="ghost"
-                label="Save draft"
+                label="Sauvegarder le brouillon"
               />
               <UButton
                 type="submit"
                 color="neutral"
                 :loading="loading"
-                label="Send"
+                label="Envoyer"
                 icon="i-lucide-send"
               />
             </div>

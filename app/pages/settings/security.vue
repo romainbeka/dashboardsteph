@@ -25,8 +25,8 @@ const validate = (state: Partial<PasswordSchema>): FormError[] => {
 
 <template>
   <UPageCard
-    title="Password"
-    description="Confirm your current password before setting a new one."
+    title="Mot de passe"
+    description="Veuillez entrez votre mot de passe actuel pour en définir un nouveau."
     variant="subtle"
   >
     <UForm
@@ -39,7 +39,7 @@ const validate = (state: Partial<PasswordSchema>): FormError[] => {
         <UInput
           v-model="password.current"
           type="password"
-          placeholder="Current password"
+          placeholder="Mot de passe actuel"
           class="w-full"
         />
       </UFormField>
@@ -48,22 +48,23 @@ const validate = (state: Partial<PasswordSchema>): FormError[] => {
         <UInput
           v-model="password.new"
           type="password"
-          placeholder="New password"
+          placeholder="Nouveau mot de passe"
           class="w-full"
         />
       </UFormField>
 
-      <UButton label="Update" class="w-fit" type="submit" />
+      <UButton label="Sauvegarder" class="w-fit" type="submit" />
     </UForm>
   </UPageCard>
 
   <UPageCard
-    title="Account"
-    description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."
+    title="Compte"
+    description="
+Vous ne souhaitez plus utiliser notre service ? Vous pouvez supprimer votre compte ici. Cette action est irréversible. Toutes les informations relatives à ce compte seront définitivement supprimées."
     class="bg-gradient-to-tl from-(--ui-error)/10 from-5% to-(--ui-bg)"
   >
     <template #footer>
-      <UButton label="Delete account" color="error" />
+      <UButton label="Supprimer mon compte" color="error" />
     </template>
   </UPageCard>
 </template>
