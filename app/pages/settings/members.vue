@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import type { Member } from '~/types'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+useHead({
+  title: `${route.meta.title || 'Paramètre'} - Membres`
+})
 
 const { data: members } = await useFetch<Member[]>('/api/members', { default: () => [] })
 

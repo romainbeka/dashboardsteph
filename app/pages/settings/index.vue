@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+useHead({
+  title: `${route.meta.title || 'Paramètre'} - Général`
+})
 
 const fileRef = ref<HTMLInputElement>()
 

@@ -3,6 +3,14 @@ import type { TableColumn } from '@nuxt/ui'
 import { upperFirst } from 'scule'
 import { getPaginationRowModel, type Row } from '@tanstack/table-core'
 import type { User } from '~/types'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+useHead({
+  title: `${route.meta.title || 'Membres'}`
+})
+
 
 const UAvatar = resolveComponent('UAvatar')
 const UButton = resolveComponent('UButton')
@@ -31,13 +39,13 @@ function getRowItems(row: Row<User>) {
       label: 'Actions'
     },
     {
-      label: 'Copy customer ID',
+      label: 'Copier l\'Id',
       icon: 'i-lucide-copy',
       onSelect() {
         navigator.clipboard.writeText(row.original.id.toString())
         toast.add({
-          title: 'Copied to clipboard',
-          description: 'Customer ID copied to clipboard'
+          title: 'L\'id à bien été copier',
+          description: 'L\'id de l\'utilisateur à bien été copier'
         })
       }
     },
@@ -45,24 +53,24 @@ function getRowItems(row: Row<User>) {
       type: 'separator'
     },
     {
-      label: 'View customer details',
+      label: 'Voir les détails',
       icon: 'i-lucide-list'
     },
     {
-      label: 'View customer payments',
+      label: 'Voir les moyens de paiement',
       icon: 'i-lucide-wallet'
     },
     {
       type: 'separator'
     },
     {
-      label: 'Delete customer',
+      label: 'Supprimer',
       icon: 'i-lucide-trash',
       color: 'error',
       onSelect() {
         toast.add({
-          title: 'Customer deleted',
-          description: 'The customer has been deleted.'
+          title: 'L\'utilisateur à bien été supprimer',
+          // description: 'The customer has been deleted.'
         })
       }
     }
@@ -194,6 +202,7 @@ const pagination = ref({
   pageIndex: 0,
   pageSize: 10
 })
+
 </script>
 
 <template>
@@ -216,7 +225,7 @@ const pagination = ref({
           :model-value="(table?.tableApi?.getColumn('email')?.getFilterValue() as string)"
           class="max-w-sm"
           icon="i-lucide-search"
-          placeholder="Filter emails..."
+          placeholder="Email"
           @update:model-value="table?.tableApi?.getColumn('email')?.setFilterValue($event)"
         />
 

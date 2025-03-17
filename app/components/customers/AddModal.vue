@@ -17,14 +17,14 @@ const state = reactive<Partial<Schema>>({
 
 const toast = useToast()
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  toast.add({ title: 'Success', description: `New customer ${event.data.name} added`, color: 'success' })
+  toast.add({ title: 'Success', description: `L'utilisateur ${event.data.name} à été ajouté`, color: 'success' })
   open.value = false
 }
 </script>
 
 <template>
-  <UModal v-model:open="open" title="New customer" description="Add a new customer to the database">
-    <UButton label="New customer" icon="i-lucide-plus" />
+  <UModal v-model:open="open" title="Ajouter" description="Ajouter une nouvelle personne a la database"> <!-- Faire pareil pour les codes promos -->
+    <UButton label="Nouvelle utilisateur" icon="i-lucide-plus" />
 
     <template #body>
       <UForm
@@ -33,7 +33,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         class="space-y-4"
         @submit="onSubmit"
       >
-        <UFormField label="Name" placeholder="John Doe" name="name">
+        <UFormField label="Nom" placeholder="John Doe" name="name">
           <UInput v-model="state.name" class="w-full" />
         </UFormField>
         <UFormField label="Email" placeholder="john.doe@example.com" name="email">
@@ -41,13 +41,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </UFormField>
         <div class="flex justify-end gap-2">
           <UButton
-            label="Cancel"
+            label="Retour"
             color="neutral"
             variant="subtle"
             @click="open = false"
           />
           <UButton
-            label="Create"
+            label="Ajouter"
             color="primary"
             variant="solid"
             type="submit"

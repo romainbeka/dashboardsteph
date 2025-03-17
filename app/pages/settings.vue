@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const links = [[{
-  label: 'General',
+  label: 'Général',
   icon: 'i-lucide-user',
   to: '/settings',
   exact: true
 }, {
-  label: 'Members',
+  label: 'Membres',
   icon: 'i-lucide-users',
   to: '/settings/members'
 }, {
@@ -13,7 +13,7 @@ const links = [[{
   icon: 'i-lucide-bell',
   to: '/settings/notifications'
 }, {
-  label: 'Security',
+  label: 'Sécurité',
   icon: 'i-lucide-shield',
   to: '/settings/security'
 }]]

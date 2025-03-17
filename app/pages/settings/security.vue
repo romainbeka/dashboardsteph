@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormError } from '@nuxt/ui'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+useHead({
+  title: `${route.meta.title || 'Paramètre'} - Sécurité`
+})
 
 const passwordSchema = z.object({
   current: z.string().min(8, 'Must be at least 8 characters'),

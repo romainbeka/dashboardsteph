@@ -1,10 +1,18 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+
 const state = reactive<{ [key: string]: boolean }>({
   email: true,
   desktop: false,
   product_updates: true,
   weekly_digest: false,
   important_updates: true
+})
+
+const route = useRoute()
+
+useHead({
+  title: `${route.meta.title || 'Paramètre'} - Notifications`
 })
 
 const sections = [{
