@@ -1,7 +1,7 @@
 import type { AvatarProps } from '@nuxt/ui'
 
 export type UserStatus = 'Abonné' | 'Désabonner' | 'Suspendu'
-export type ReductionStatut = '10%' | '60%' | '100%'
+export type ReductionStatus = "Active" | "Terminer" | "Bientôt Expirées" | "Prochainement" | "";
 export type SaleStatus = 'Payer' | 'Erreur' | 'Rembourser'
 
 export interface User {
@@ -15,9 +15,14 @@ export interface User {
 
 export interface Reduction {
   id: number
-  name: string
+  code: string
   pourcentage: number
   utiliser: number
+  maxUsage?: number | null
+  start: string
+  end: string
+  status: ReductionStatus
+  isActive: boolean
 }
 
 export interface Mail {

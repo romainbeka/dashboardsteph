@@ -11,7 +11,8 @@ const links = [[{
   onSelect: () => {
     open.value = false
   }
-}, {
+}, 
+{
   label: 'Mail',
   icon: 'i-lucide-inbox',
   to: '/inbox',
@@ -19,21 +20,32 @@ const links = [[{
   onSelect: () => {
     open.value = false
   }
-}, {
+}, 
+{
   label: 'Membres',
   icon: 'i-lucide-users',
   to: '/customers',
   onSelect: () => {
     open.value = false
   }
-},{
+},
+{
+  label: 'Catalogue',
+  icon: 'i-lucide-book-image',
+  to: '/catalogue',
+  onSelect: () => {
+    open.value = false
+  }
+},
+{
   label: 'Réductions',
-  icon: 'i-lucide-users',
+  icon: 'i-lucide-percent',
   to: '/reduction',
   onSelect: () => {
     open.value = false
   }
-}, {
+}, 
+{
   label: 'Paramètres',
   to: '/settings',
   icon: 'i-lucide-settings',
@@ -109,9 +121,9 @@ onMounted(async () => {
       class="bg-(--ui-bg-elevated)/25"
       :ui="{ footer: 'lg:border-t lg:border-(--ui-border)' }"
     >
-      <template #header="{ collapsed }">
-        <TeamsMenu :collapsed="collapsed" />
-      </template>
+      <!-- <template #header="{ collapsed }"> -->
+      <!--  <TeamsMenu :collapsed="collapsed" /> -->
+      <!-- </template> -->
 
       <template #default="{ collapsed }">
         <UDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-(--ui-border)" />
