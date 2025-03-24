@@ -2,7 +2,7 @@
 import type { TableColumn } from '@nuxt/ui'
 import { upperFirst } from 'scule'
 import { getPaginationRowModel, type Row } from '@tanstack/table-core'
-import type { User } from '~/types'
+import type { JDR } from '~/types'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -27,11 +27,11 @@ const columnFilters = ref([{
 const columnVisibility = ref()
 const rowSelection = ref({ 1: true })
 
-const { data, status } = await useFetch<User[]>('/api/customers', {
+const { data, status } = await useFetch<JDR[]>('/api/jdr', {
   lazy: true
 })
 
-function getRowItems(row: Row<User>) {
+function getRowItems(row: Row<JDR>) {
   return [
     {
       type: 'label',
@@ -76,7 +76,7 @@ function getRowItems(row: Row<User>) {
   ]
 }
 
-const columns: TableColumn<User>[] = [
+const columns: TableColumn<JDR>[] = [
   {
     id: 'select',
     header: ({ table }) =>
@@ -100,65 +100,83 @@ const columns: TableColumn<User>[] = [
     header: 'ID'
   },
   {
-    accessorKey: 'name',
-    header: 'Name',
+    accessorKey: 'avatar',
+    header: 'Image',
     cell: ({ row }) => {
-      return h('div', { class: 'flex items-center gap-3' }, [
-        h(UAvatar, {
-          ...row.original.avatar,
-          size: 'lg'
-        }),
-        h('div', undefined, [
-          h('p', { class: 'font-medium text-(--ui-text-highlighted)' }, row.original.name),
-          h('p', { class: '' }, `@${row.original.name}`)
-        ])
-      ])
-    }
-  },
-  {
-    accessorKey: 'email',
-    header: ({ column }) => {
-      const isSorted = column.getIsSorted()
-
-      return h(UButton, {
-        color: 'neutral',
-        variant: 'ghost',
-        label: 'Email',
-        icon: isSorted
-          ? isSorted === 'asc'
-            ? 'i-lucide-arrow-up-narrow-wide'
-            : 'i-lucide-arrow-down-wide-narrow'
-          : 'i-lucide-arrow-up-down',
-        class: '-mx-2.5',
-        onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
+      return h('img', {
+        src: row.original.avatar?.src,
+        alt: 'Avatar',
+        class: 'w-12 h-12 object-cover rounded-full shadow'
       })
     }
   },
   {
-    accessorKey: 'location',
-    header: 'Location',
-    cell: ({ row }) => row.original.location
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    filterFn: 'equals',
+    accessorKey: 'compatibleSystems',
+    header: 'Systèmes',
     cell: ({ row }) => {
-      const color = {
-        Abonné: 'success' as const,
-        Désabonner: 'error' as const,
-        Suspendu: 'warning' as const
-      }[row.original.status]
-
-      return h(UBadge, { class: 'capitalize', variant: 'subtle', color }, () =>
-        row.original.status
-      )
+      const systems = row.original.compatibleSystems || []
+      return h('div', {}, systems.map((system, index) => 
+        h('p', {}, [
+          system,
+          index < systems.length - 1 ? ',' : ''
+        ])
+      ))
     }
   },
   {
-    id: 'actions',
+    accessorKey: 'name',
+    header: 'Nom'
+  },
+  {
+    accessorKey: 'description',
+    header: 'Description',
     cell: ({ row }) => {
-      return h(
+      const description = row.original.description || '-'
+      const maxLength = 10 // nombre de caractères à afficher max
+      return description.length > maxLength
+        ? description.slice(0, maxLength) + '...'
+        : description
+    }
+  },
+  {
+    accessorKey: 'price',
+    header: 'Prix (€)',
+    cell: ({ row }) => row.original.price ? `${row.original.price} €` : '-'
+  },
+  {
+    accessorKey: 'discount',
+    header: 'Réduction',
+    cell: ({ row }) => row.original.discount || 'Aucune'
+  },
+  {
+    accessorKey: 'systems',
+    header: 'Systèmes secondaires',
+    cell: ({ row }) => {
+      const systems = row.original.compatibleSystemsecondaire || []
+      return h('div', {}, systems.map((system, index) => 
+        h('p', {}, [
+          system,
+          index < systems.length - 1 ? ',' : ''
+        ])
+      ))
+    }
+  },
+  {
+    accessorKey: 'pages',
+    header: 'Pages'
+  },
+  {
+    accessorKey: 'theme',
+    header: 'Thème'
+  },
+  {
+    accessorKey: 'language',
+    header: 'Langue'
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) =>
+      h(
         'div',
         { class: 'text-right' },
         h(
@@ -178,7 +196,6 @@ const columns: TableColumn<User>[] = [
             })
         )
       )
-    }
   }
 ]
 

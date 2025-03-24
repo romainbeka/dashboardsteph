@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "D&D Monde parallèle",
+    "systems": [
+      "D&D - Eberron"
+    ],
+    "avatar": {
+      "src": "https://i.pravatar.cc/128?u=2"
+    }
+  },
+  {
+    "id": 2,
+    "name": "D&D Monde Oublié",
+    "systems": [
+      "D&D - Forgotten Realms"
+    ],
+    "avatar": {
+      "src": "https://i.pravatar.cc/128?u=2"
+    }
+  },
+  {
+    "id": 3,
+    "name": "test1",
+    "description": "test1",
+    "price": 20,
+    "discount": "",
+    "compatibleSystems": [
+      "D&D"
+    ],
+    "compatibleSystemsecondaire": [
+      "D&D - Forgotten Realms"
+    ],
+    "avatar": {
+      "src": "/uploads/1742848340516_1 (2).jpg"
+    },
+    "associatedProducts": [],
+    "pages": 300,
+    "theme": "Contemporain",
+    "language": "Français"
+  },
+  {
+    "id": 4,
+    "name": "Star Force ",
+    "description": "Star Force c'est super la vie de ma mere ",
+    "price": 300,
+    "discount": "Inox10",
+    "compatibleSystems": [
+      "D&D"
+    ],
+    "compatibleSystemsecondaire": [
+      "D&D - Forgotten Realms"
+    ],
+    "avatar": {
+      "src": "/uploads/1742848484885_maxresdefault.jpg"
+    },
+    "associatedProducts": [],
+    "pages": 3000,
+    "theme": "Contemporain",
+    "language": "Français"
+  }
+]

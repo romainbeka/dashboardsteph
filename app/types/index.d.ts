@@ -71,3 +71,21 @@ export interface Range {
   start: Date
   end: Date
 }
+
+export interface JDR {
+  id: number
+  name: string
+  description?: string
+  price?: number
+  discount?: string
+  systems?: string[]
+  compatibleSystems?: string[]
+  compatibleSystemsecondaire?: string[]
+  associatedProducts?: string[]
+  pages?: number
+  theme?: 'Contemporain' | 'Horreur' | 'Fantastique' | 'Sci-fi'
+  language?: string
+  avatar: {
+    src: string
+  }
+}

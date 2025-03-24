@@ -2,11 +2,10 @@
 import type { TableColumn } from '@nuxt/ui'
 import { upperFirst } from 'scule'
 import { getPaginationRowModel, type Row } from '@tanstack/table-core'
-import type { Reduction, User } from '~/types'
+import type { Reduction } from '~/types'
 import { useRoute } from 'vue-router'
 import { ReductionAddModal } from '#components'
 import { format } from 'date-fns'
-import { fr } from 'date-fns/locale'
 
 const route = useRoute()
 
