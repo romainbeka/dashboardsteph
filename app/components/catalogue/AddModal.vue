@@ -166,6 +166,28 @@ const items = [
   }
 ]
 
+const emit = defineEmits<{
+  (e: 'added', jdr: JDR): void
+}>()
+
+function resetForm() {
+  state.name = ''
+  state.description = ''
+  state.price = undefined
+  state.discount = ''
+  state.compatibleSystems = []
+  state.compatibleSystemsecondaire = []
+  state.image = undefined
+  state.associatedProducts = []
+  state.pages = undefined
+  state.theme = 'Contemporain'
+  state.language = 'Français'
+
+  if (imageInput.value) {
+    imageInput.value.value = ''
+  }
+}
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const formData = new FormData()
 
@@ -178,10 +200,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   }
 
   try {
-    await $fetch('/api/jdr', {
+    const response = await $fetch<{ newEntry: JDR }>('/api/jdr', {
       method: 'POST',
       body: formData
     })
+
+    emit('added', response.newEntry)
 
     toast.add({
       title: 'Succès',
@@ -190,6 +214,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     })
 
     open.value = false
+    resetForm()
   } catch (error) {
     console.error('Erreur lors de l’ajout :', error)
     toast.add({
@@ -200,6 +225,24 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   }
 }
 
+watchEffect(() => {
+  if (jdrFilteredBySecondarySystem.value.length) {
+    state.associatedProducts = jdrFilteredBySecondarySystem.value.map(jdr => jdr.name)
+  } else {
+    state.associatedProducts = []
+  }
+})
+
+const loadData = async () => {
+  const res = await fetch('/api/jdr')
+  jdrList.value = await res.json()
+}
+
+watch(open, (val) => {
+  if (val) {
+    loadData()
+  }
+})
 
 </script>
 
@@ -334,7 +377,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
               <USeparator />
 
               <!-- Résultats dynamiques -->
-              <UFormField label="Produits liés aux systèmes secondaires">
+              <UFormField label="Produits associés" name="associatedProducts">
                 <div v-if="jdrFilteredBySecondarySystem.length" class="flex flex-wrap gap-2">
                   <UBadge
                     v-for="jdr in jdrFilteredBySecondarySystem"
@@ -345,8 +388,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
                     {{ jdr.name }}
                   </UBadge>
                 </div>
-                <p v-else class="text-xs text-gray-400">Aucun jeu de rôle trouvé pour les systèmes secondaires sélectionnés.</p>
+                <p v-else class="text-xs text-gray-400">Aucun produit associé</p>
               </UFormField>
+
 
               <USeparator />
 
@@ -380,6 +424,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
                 <li><strong>Réduction :</strong> {{ state.discount || 'Aucune' }}</li>
                 <li><strong>Systèmes :</strong> {{ state.compatibleSystems?.join(', ') }}</li>
                 <li><strong>Systèmes secondaires :</strong> {{ state.compatibleSystemsecondaire?.join(', ') }}</li>
+                <li><strong>Produits associés :</strong> {{ state.associatedProducts?.join(', ') }}</li>
                 <li><strong>Pages :</strong> {{ state.pages }}</li>
                 <li><strong>Thème :</strong> {{ state.theme }}</li>
                 <li><strong>Langue :</strong> {{ state.language }}</li>

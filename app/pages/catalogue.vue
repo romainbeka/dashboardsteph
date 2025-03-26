@@ -27,7 +27,9 @@ const columnFilters = ref([{
 const columnVisibility = ref()
 const rowSelection = ref({ 1: true })
 
-const { data, status } = await useFetch<JDR[]>('/api/jdr', {
+const data = ref<JDR[]>([])
+
+const { data: fetchedData, status } = await useFetch<JDR[]>('/api/jdr', {
   lazy: true
 })
 
@@ -162,6 +164,18 @@ const columns: TableColumn<JDR>[] = [
     }
   },
   {
+    accessorKey: 'associatedProducts',
+    header: 'Produits associés',
+    cell: ({ row }) => {
+      const products = row.original.associatedProducts || []
+      return h('div', { class: 'flex flex-wrap gap-1' },
+        products.map(product =>
+          h(resolveComponent('UBadge'), { color: 'primary', variant: 'soft' }, () => product)
+        )
+      )
+    }
+  },
+  {
     accessorKey: 'pages',
     header: 'Pages'
   },
@@ -219,6 +233,39 @@ const pagination = ref({
   pageSize: 10
 })
 
+const loadData = async () => {
+  const res = await fetch('/api/jdr')
+  data.value = await res.json()
+}
+
+const addJdr = (newJdr: JDR) => {
+  // 1. Mettre à jour les anciens JDR pour ajouter la réciprocité dans les produits associés
+  const updatedData = data.value.map(jdr => {
+    if (newJdr.associatedProducts?.includes(jdr.name)) {
+      // On ajoute le nouveau JDR dans la liste associée s'il n'y est pas déjà
+      const updatedProducts = jdr.associatedProducts || []
+      if (!updatedProducts.includes(newJdr.name)) {
+        updatedProducts.push(newJdr.name)
+      }
+
+      return {
+        ...jdr,
+        associatedProducts: updatedProducts
+      }
+    }
+    return jdr
+  })
+
+  // 2. Ajouter le nouveau JDR à la liste avec les mises à jour
+  data.value = [...updatedData, newJdr]
+}
+
+watchEffect(() => {
+  if (fetchedData.value) {
+    data.value = [...fetchedData.value] // on initialise `data`
+  }
+})
+
 </script>
 
 <template>
@@ -230,7 +277,7 @@ const pagination = ref({
         </template>
 
         <template #right>
-          <CatalogueAddModal />
+          <CatalogueAddModal @added="addJdr"/>
         </template>
       </UDashboardNavbar>
     </template>
@@ -246,7 +293,11 @@ const pagination = ref({
         />
 
         <div class="flex flex-wrap items-center gap-1.5">
-          <CatalogueDeleteModal :count="table?.tableApi?.getFilteredSelectedRowModel().rows.length">
+          <CatalogueDeleteModal
+            :count="table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0"
+            :jdr-ids="table?.tableApi?.getFilteredSelectedRowModel().rows.map(row => row.original.id) || []"
+            @confirm="loadData"
+          >
             <UButton
               v-if="table?.tableApi?.getFilteredSelectedRowModel().rows.length"
               label="Supprimer"

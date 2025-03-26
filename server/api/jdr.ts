@@ -12,12 +12,49 @@ if (!existsSync(uploadDir)) {
 }
 
 export default defineEventHandler(async (event) => {
-  const method = event.method
+  const method = getMethod(event)
 
   if (method === 'GET') {
     const data = await readFile(filePath, 'utf-8')
     return JSON.parse(data)
   }
+
+  if (method === 'DELETE') {
+    const rawId = getQuery(event).id
+    const id = parseInt(String(rawId))
+  
+    if (isNaN(id)) {
+      throw createError({ statusCode: 400, statusMessage: 'ID invalide' })
+    }
+  
+    const fileData = await readFile(filePath, 'utf-8')
+    let jdrList = JSON.parse(fileData)
+  
+    // Trouver le JDR à supprimer
+    const jdrToDelete = jdrList.find((jdr: any) => jdr.id === id)
+  
+    if (!jdrToDelete) {
+      throw createError({ statusCode: 404, statusMessage: 'JDR introuvable' })
+    }
+  
+    // Supprimer le JDR
+    jdrList = jdrList.filter((jdr: any) => jdr.id !== id)
+  
+    // Supprimer ce JDR dans les produits associés des autres
+    jdrList = jdrList.map((jdr: any) => {
+      if (jdr.associatedProducts?.includes(jdrToDelete.name)) {
+        return {
+          ...jdr,
+          associatedProducts: jdr.associatedProducts.filter((name: string) => name !== jdrToDelete.name)
+        }
+      }
+      return jdr
+    })
+  
+    await writeFile(filePath, JSON.stringify(jdrList, null, 2), 'utf-8')
+  
+    return { success: true }
+  }  
 
   if (method === 'POST') {
     const form = await readMultipartFormData(event)
@@ -43,7 +80,7 @@ export default defineEventHandler(async (event) => {
         }
       }
     }
-
+    
     // Lire les données existantes
     const jsonData = await readFile(filePath, 'utf-8')
     const jdrArray = JSON.parse(jsonData)
@@ -52,9 +89,24 @@ export default defineEventHandler(async (event) => {
     const lastId = jdrArray.length > 0 ? Math.max(...jdrArray.map((item: any) => item.id || 0)) : 0
     const newId = lastId + 1
 
+    if (body.associatedProducts?.length > 0) {
+      for (const productName of body.associatedProducts) {
+        const associatedJdr = jdrArray.find((jdr: any) => jdr.name === productName)
+        if (associatedJdr) {
+          if (!Array.isArray(associatedJdr.associatedProducts)) {
+            associatedJdr.associatedProducts = []
+          }
+          if (!associatedJdr.associatedProducts.includes(body.name)) {
+            associatedJdr.associatedProducts.push(body.name)
+          }
+        }
+      }
+    }
+
     const newEntry = {
       id: newId,
-      ...body
+      ...body,
+      associatedProducts: body.associatedProducts || []
     }
 
     jdrArray.push(newEntry)
