@@ -181,7 +181,7 @@ const columns: TableColumn<JDR>[] = [
   },
   {
     accessorKey: 'theme',
-    header: 'Thème'
+    header: 'Thèm'
   },
   {
     accessorKey: 'language',
